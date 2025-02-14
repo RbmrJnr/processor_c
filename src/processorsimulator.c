@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-typedef struct processorsimulator{
+typedef struct{
     uint16_t Registradores[8];
     uint16_t PC;
     uint16_t IR;
@@ -10,7 +10,7 @@ typedef struct processorsimulator{
 
     uint16_t Memoria[1024];
     uint16_t Pilha[256];
-};
+} processorsimulator;
 
 void readArchive(const char *Arquivo) {
     char endereco[50], conteudo[50];
@@ -22,11 +22,15 @@ void readArchive(const char *Arquivo) {
         return;
     }
     printf("\nConteúdo do arquivo:\n");
-    while(fscanf(arq, "%49[^:]: %49[^\n]\n", endereco, conteudo) == 2){
+    while(fscanf(arq, "%30[^:]: %30[^\n]\n", endereco, conteudo) == 2){
         printf("Endereco: %s | Conteudo: %s\n", endereco, conteudo);
     }
 
     fclose(arq);
+}
+
+void executeInstruction(processorsimulator *processador){
+
 }
 
 int main(){
